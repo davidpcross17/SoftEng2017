@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+# Code for this file based on this video: https://www.youtube.com/watch?v=xyi4YnX7LUQ
 
   def movie_params
     params.require(:movie).permit(:title, :rating, :description, :release_date)
@@ -11,7 +12,8 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
+    @movies = Movie.order(params[:sort_by])
+    @column_sort_by = params[:sort_by]
   end
 
   def new
