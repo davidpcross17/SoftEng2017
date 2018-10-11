@@ -10,7 +10,23 @@ describe Admin::CategoriesController do
     henri = Factory(:user, :login => 'henri', :profile => Factory(:profile_admin, :label => Profile::ADMIN))
     request.session = { :user => henri.id }
   end
-
+  
+  describe "test_new" do
+    before do
+      @category = Category.new
+    end
+    
+     it "should return an empty category" do
+      assigns(:category).should be_nil
+     end
+  end
+  
+  describe "test_save" do
+     it "should never report success" do
+      flash[:success].should be_nil
+     end
+  end
+ 
   it "test_index" do
     get :index
     assert_response :redirect, :action => 'index'
